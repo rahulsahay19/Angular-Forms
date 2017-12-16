@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div id="user-data">
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" ngModel name="firstname" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname"  ngModel name="lastname"  class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="designation">Designation</label>
+            <input type="text" id="designation"  ngModel name="designation" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="email">Your Mail</label>
+            <input type="email" id="email" ngModel name="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="username">User Name</label>
+            <input type="text" id="username" ngModel name="username" class="form-control">
+          </div>
+          <button class="btn btn-default" type="button">Check Availability?</button>
+      </div>
+        <div class="form-group">
+          <label for="secret">Secret Questions</label>
+          <select id="secret" ngModel name="secret" class="form-control">
+            <option value="school">Your first School Name?</option>
+            <option value="computer">Your first Computer Model?</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
