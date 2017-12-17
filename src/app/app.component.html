@@ -2,37 +2,53 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div id="user-data">
+        <div id="user-data" ngModelGroup="userForm">
           <div class="form-group">
             <label for="firstname">First Name</label>
-            <input type="text" id="firstname" ngModel name="firstname" class="form-control">
+            <input type="text" id="firstname" [ngModel]="'Rahul'" name="firstname" class="form-control" required #firstname="ngModel">
+            <span class="help-block" *ngIf="!firstname.valid && firstname.touched">Please enter valid First Name!</span>
           </div>
           <div class="form-group">
             <label for="lastname">Last Name</label>
-            <input type="text" id="lastname"  ngModel name="lastname"  class="form-control">
+            <input type="text" id="lastname" [ngModel]="'Sahay'" name="lastname"  class="form-control" required #lastname="ngModel">
+            <span class="help-block" *ngIf="!lastname.valid && lastname.touched">Please enter valid Last Name!</span>
           </div>
           <div class="form-group">
             <label for="designation">Designation</label>
-            <input type="text" id="designation"  ngModel name="designation" class="form-control">
+            <input type="text" id="designation"  [ngModel]="'Developer'" name="designation" class="form-control" required #designation="ngModel">
+            <span class="help-block" *ngIf="!designation.valid && designation.touched">Please enter valid Designation!</span>
           </div>
           <div class="form-group">
             <label for="email">Your Mail</label>
-            <input type="email" id="email" ngModel name="email" class="form-control">
+            <input type="email" id="email" [ngModel]="'rahul@sahay.com'" name="email" class="form-control" required email #email="ngModel">
+            <span class="help-block" *ngIf="!email.valid && email.touched">Please enter valid Email Id!</span>
           </div>
           <div class="form-group">
             <label for="username">User Name</label>
-            <input type="text" id="username" ngModel name="username" class="form-control">
+            <input type="text" id="username" [ngModel]="'admin'" name="username" class="form-control" required #username="ngModel">
+            <span class="help-block" *ngIf="!username.valid && username.touched">Please enter valid Username!</span>
           </div>
           <button class="btn btn-default" type="button">Check Availability?</button>
-      </div>
+    
         <div class="form-group">
           <label for="secret">Secret Questions</label>
-          <select id="secret" ngModel name="secret" class="form-control">
+          <select id="secret" [ngModel]="'school'" name="secret" class="form-control" required #secret="ngModel">
             <option value="school">Your first School Name?</option>
             <option value="computer">Your first Computer Model?</option>
           </select>
+          <span class="help-block" *ngIf="!secret.valid && secret.touched">Please select any!</span>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <div class="form-group">
+          <textarea class="form-control" name="reply" rows="2" [(ngModel)]="reply"></textarea>
+          <span>Answer: {{reply}}</span>
+        </div>
+        <div class="radio" *ngFor="let m of gender">
+          <label>
+            <input type="radio" name="gender" ngModel [value]="m">{{m}}
+          </label>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+      </div>
       </form>
     </div>
   </div>
