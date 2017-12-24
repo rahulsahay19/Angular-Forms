@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -7,19 +7,24 @@ import { NgForm } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  @ViewChild('f') signupForm:NgForm;
-  reply='';
-  gender = ['Male','Female',"Don't want to disclose" ];
+export class AppComponent implements OnInit {
+  
+  signUpForm:FormGroup;
   checkUserName() {
     const availableName = 'admin';
   }
 
-  // onSubmit(form:NgForm){
-  //   console.log(form);
-  // }
+  ngOnInit(): void {
+    this.signUpForm = new FormGroup({
+      'firstname': new FormControl('Rahul', Validators.required),
+      'lastname': new FormControl('Sahay', Validators.required),
+      'designation': new FormControl('Developer', Validators.required),
+      'email': new FormControl('rahul@sahay.com',[Validators.required,Validators.email]),
+      'username': new FormControl('admin',Validators.required),
+    });
+   }
 
   onSubmit(){
-    console.log(this.signupForm);
+    console.log(this.signUpForm);
   }
 }
