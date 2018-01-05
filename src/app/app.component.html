@@ -2,36 +2,42 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-        <div id="user-data">
+        <div formGroupName="employeeData">
           <div class="form-group">
             <label for="firstname">First Name</label>
             <input type="text" id="firstname" class="form-control" formControlName="firstname">
-            <span class="help-block"
-             *ngIf="!signUpForm.get('firstname').valid && signUpForm.get('firstname').touched">Please enter First Name!</span>
+            <span class="help-block" *ngIf="!signUpForm.get('employeeData.firstname').valid && signUpForm.get('employeeData.firstname').touched">Please enter First Name!</span>
           </div>
           <div class="form-group">
             <label for="lastname">Last Name</label>
             <input type="text" id="lastname" class="form-control" formControlName="lastname">
-            <span class="help-block"
-             *ngIf="!signUpForm.get('lastname').valid && signUpForm.get('lastname').touched">Please enter Last Name!</span>
+            <span class="help-block" *ngIf="!signUpForm.get('employeeData.lastname').valid && signUpForm.get('employeeData.lastname').touched">Please enter Last Name!</span>
           </div>
           <div class="form-group">
             <label for="designation">Designation</label>
             <input type="text" id="designation" class="form-control" formControlName="designation">
-            <span class="help-block"
-             *ngIf="!signUpForm.get('designation').valid && signUpForm.get('designation').touched">Please enter Designation!</span>
+            <span class="help-block" *ngIf="!signUpForm.get('employeeData.designation').valid && signUpForm.get('employeeData.designation').touched">Please enter Designation!</span>
           </div>
           <div class="form-group">
             <label for="email">Your Mail</label>
             <input type="email" id="email" class="form-control" formControlName="email">
-            <span class="help-block"
-            *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched">Please enter valid Email!</span>
+            <span class="help-block" *ngIf="!signUpForm.get('employeeData.email').valid && signUpForm.get('employeeData.email').touched">Please enter valid Email!</span>
           </div>
           <div class="form-group">
             <label for="username">User Name</label>
             <input type="text" id="username" class="form-control" formControlName="username">
-            <span class="help-block"
-             *ngIf="!signUpForm.get('username').valid && signUpForm.get('username').touched">Please enter UserName!</span>
+            <span class="help-block" *ngIf="!signUpForm.get('employeeData.username').valid && signUpForm.get('employeeData.username').touched">
+              <span class="help-block" *ngIf="signUpForm.get('employeeData.username').errors['notAllowed']">admin and super-admin names are not allowed!</span>
+              <span class="help-block" *ngIf="signUpForm.get('employeeData.username').errors['required']">Username is required!</span>
+            </span>
+           
+          </div>
+          <div formArrayName="areas">
+            <h4>Areas</h4>
+            <button class="btn btn-info" type="button" (click)="onAddAreas()">Add Areas</button>
+            <div class="form-group" *ngFor="let a of signUpForm.get('employeeData.areas').controls; let i = index;">
+              <input type="text" class="form-control" [formControlName]="i">
+            </div>
           </div>
           <span class="help-block" *ngIf="!signUpForm.valid && signUpForm.touched">Please enter Valid Data!</span>
           <button class="btn btn-primary" type="submit">Sign Up</button>
