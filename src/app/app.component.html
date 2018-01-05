@@ -35,7 +35,8 @@
           <div formArrayName="areas">
             <h4>Areas</h4>
             <button class="btn btn-info" type="button" (click)="onAddAreas()">Add Areas</button>
-            <div class="form-group" *ngFor="let a of signUpForm.get('employeeData.areas').controls; let i = index;">
+            <!-- <div class="form-group" *ngFor="let a of signUpForm.get('employeeData.areas').controls; let i = index;"> -->
+            <div class="form-group" *ngFor="let a of signUpForm.get('employeeData.areas').value; let i = index;">
               <input type="text" class="form-control" [formControlName]="i">
             </div>
           </div>
